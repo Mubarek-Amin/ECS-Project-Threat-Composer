@@ -9,6 +9,10 @@ resource "aws_ecr_repository" "ECS_TC"{
  }
 }
 
-resource "aws_s3_bucket" "ECS_S3"{
-    bucket = "s3_ECS"
+resource "aws_s3_bucket" "tc_ecs_s3"{
+  bucket = "s3-ecs-tc"
+  
+  tags= {
+    name = "s3_ecs_tc"
+  }
 }
