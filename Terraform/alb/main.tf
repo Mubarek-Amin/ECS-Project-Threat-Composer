@@ -2,7 +2,7 @@ resource "aws_lb" "alb_tc" {
     name = "alb-tc"
     internal = false
     load_balancer_type = "application"
-    security_groups = var.alb_sg
+    security_groups = [var.alb_sg_id]
     subnets = var.subnet_id_pub
   
 }

@@ -7,7 +7,7 @@ variable "subnet_id_pub"{
 variable "cert_arn" {
   
 }
-variable "alb_sg" {
-  
+variable "alb_sg_id" {
+ type = string
 }
 
