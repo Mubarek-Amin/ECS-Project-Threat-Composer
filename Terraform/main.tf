@@ -10,7 +10,7 @@ module "alb"{
     vpc_id = module.vpc.vpc_id
     subnet_id_pub = module.vpc.subnet_id_pub
     cert_arn = module.route53.cert_arn
-    sg_alb = module.security_groups.sg_alb
+    alb_sg = module.security_groups.alb_sg
 
 }
 module "route53"{
