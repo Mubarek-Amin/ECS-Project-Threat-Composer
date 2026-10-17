@@ -2,8 +2,8 @@ resource "aws_lb" "alb_tc" {
     name = "alb-tc"
     internal = false
     load_balancer_type = "application"
-    security_groups = var.sg_alb
-    subnets = var.subnet_id_pub[count.index]
+    security_groups = var.alb_sg
+    subnets = var.subnet_id_pub
   
 }
 resource "aws_lb_listener" "HTTPS" {
