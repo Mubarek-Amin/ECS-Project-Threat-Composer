@@ -17,4 +17,8 @@ RUN yarn global add serve
 
 COPY --from=builder app/build/ /build
 
+RUN useradd nonroot
+
+USER nonroot
+
 CMD ["serve", "-s", "build" ]
