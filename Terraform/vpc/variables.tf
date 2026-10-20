@@ -5,6 +5,9 @@ output "subnet_id_pub" {
 
   value = aws_subnet.tc_pub[*].id
 }
+output "subnet_id_priv" {
+  value = aws_subnet.tc_priv[*].id
+}
 variable "availability_zone" {
   default = ["us-east-1a","us-east-1b"]
 }

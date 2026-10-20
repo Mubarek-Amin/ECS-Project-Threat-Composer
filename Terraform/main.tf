@@ -4,6 +4,9 @@ module "vpc"{
 }
 module "ecs"{
     source = "./ecs"
+    image = data.aws_ecr_repository.ECS_TC.repository_url
+    tg_arn = module.alb.tg_arn
+    subnet_id_priv = module.vpc.subnet_id_priv
 }
 module "alb"{
     source = "./alb"
@@ -24,4 +27,8 @@ module "security_groups" {
   source = "./security_groups"
   vpc_id = module.vpc.vpc_id
 
+}
+data "aws_ecr_repository" "ECS_TC" {
+    name = "ecs_tc"
+  
 }
