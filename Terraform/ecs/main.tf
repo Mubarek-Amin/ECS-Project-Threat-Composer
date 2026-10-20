@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "ecs_tc_td" {
   memory= 512
   container_definitions = jsonencode([{
     name = "ecs_tc"
-    image = "${var.image}:${locals.tag}"
+    image = "${var.image}:${local.tag}"
     cpu = 256
     memory= 512
     portmappings = [{
@@ -42,6 +42,9 @@ resource "aws_ecs_service" "ecs_tc_service" {
 
 
 }
-  
+ 
+locals {
+  tag = ":1"
+}
 
  

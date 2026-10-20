@@ -49,7 +49,9 @@ resource "aws_security_group_rule" "ecs_egress" {
     protocol = -1
     from_port = 0
     to_port = 0
-    type = "ingress"
+    cidr_blocks = ["0.0.0.0/0"]
+    type = "egress"
+    
 
 }
 
