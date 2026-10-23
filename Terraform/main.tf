@@ -16,11 +16,18 @@ module "alb"{
     alb_sg_id = module.security_groups.alb_sg_id
 
 }
-module "acm" {
-  source = "./acm"
+
+module "acm"{
+    source = "./acm"
+    zone_id = data.aws_route53_zone.tc_zone.id
+    
 }
 module "route53"{
     source = "./route53"
+    alb_dns_name = module.alb.alb_dns_name
+    alb_zone_id = module.alb.alb_zone_id
+    zone_id = data.aws_route53_zone.tc_zone.id
+
 }
 
 module "security_groups" {
@@ -31,4 +38,7 @@ module "security_groups" {
 data "aws_ecr_repository" "ECS_TC" {
     name = "ecs_tc"
   
+}
+data "aws_route53_zone" "tc_zone" {
+  name = "amin-mubarek.com"
 }
