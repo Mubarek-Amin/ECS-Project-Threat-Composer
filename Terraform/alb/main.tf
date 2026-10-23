@@ -4,7 +4,7 @@ resource "aws_lb" "alb_tc" {
     load_balancer_type = "application"
     security_groups = [var.alb_sg_id]
     subnets = var.subnet_id_pub
-  
+    
 }
 resource "aws_lb_listener" "HTTPS" {
   load_balancer_arn = aws_lb.alb_tc.arn
