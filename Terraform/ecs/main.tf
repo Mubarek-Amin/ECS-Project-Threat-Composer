@@ -13,10 +13,19 @@ resource "aws_ecs_task_definition" "ecs_tc_td" {
     image = "${var.image}:${local.tag}"
     cpu = 256
     memory= 512
-    portmappings = [{
+    portMappings = [{
       containerPort = 3000
       hostPort = 3000
     }]
+    logConfiguration = {
+      logDriver = "awslogs"
+      options = {
+        "aws-logs-group" = aws_cloudwatch_log_group.ecs_log.logs
+        "aws_logs_region" = "us-east-1"
+        "aws_logs-stream-prefix" = "ecs"
+      }
+
+    }
   }])
 }
 
@@ -44,7 +53,7 @@ resource "aws_ecs_service" "ecs_tc_service" {
 }
  
 locals {
-  tag = ":1"
+  tag = "1"
 }
 
  
