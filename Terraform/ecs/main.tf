@@ -8,6 +8,7 @@ resource "aws_ecs_task_definition" "ecs_tc_td" {
   network_mode = "awsvpc"
   cpu = 256
   memory= 512
+  execution_role_arn = var.exec_arn
   container_definitions = jsonencode([{
     name = "ecs_tc"
     image = "${var.image}:${local.tag}"
@@ -20,9 +21,9 @@ resource "aws_ecs_task_definition" "ecs_tc_td" {
     logConfiguration = {
       logDriver = "awslogs"
       options = {
-        "aws-logs-group" = aws_cloudwatch_log_group.ecs_log.logs
-        "aws_logs_region" = "us-east-1"
-        "aws_logs-stream-prefix" = "ecs"
+        "awslogs-group" = aws_cloudwatch_log_group.ecs_log.name
+        "awslogs-region" = "us-east-1"
+        "awslogs-stream-prefix" = "ecs"
       }
 
     }
@@ -45,11 +46,16 @@ resource "aws_ecs_service" "ecs_tc_service" {
   }
   network_configuration {
     subnets = var.subnet_id_priv
-    assign_public_ip = true
+    security_groups = [var.ecs_sg_id]
+    assign_public_ip = false
   }
   
 
 
+}
+resource "aws_cloudwatch_log_group" "ecs_log" {
+  name = "/ecs/ecs_tc"
+  retention_in_days = 14
 }
  
 locals {
