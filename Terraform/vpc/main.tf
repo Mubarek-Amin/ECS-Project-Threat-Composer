@@ -9,14 +9,14 @@ resource "aws_vpc" "ecs_vpc"{
 
 resource "aws_subnet" "tc_pub"{
  count = 2
- cidr_block = var.cidr_blocks[count.index]
+ cidr_block = var.pub_cidr_blocks[count.index]
  vpc_id = aws_vpc.ecs_vpc.id
  availability_zone = var.availability_zone[count.index]
 }
 
 resource "aws_subnet" "tc_priv"{
  count = 2
- cidr_block = var.cidr_blocks[count.index]
+ cidr_block = var.priv_cidr_blocks[count.index]
  vpc_id = aws_vpc.ecs_vpc.id
  availability_zone = var.availability_zone[count.index]
 }
@@ -29,9 +29,7 @@ resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.tc-eip[count.index].id
   subnet_id = aws_subnet.tc_pub[count.index].id
   depends_on =  [aws_internet_gateway.igw]
-  availability_zone_address {
-    availability_zone = var.availability_zone[count.index]
-  }
+
 }
 
 resource "aws_route_table" "pub_rt"{

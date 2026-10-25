@@ -13,7 +13,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "node16",
+    "module": "esnext",
     "noEmitOnError": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
@@ -31,7 +31,7 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node16",
+    "moduleResolution": "node",
     "isolatedModules": true,
     "noEmit": true,
     "emitDecoratorMetadata": true,
