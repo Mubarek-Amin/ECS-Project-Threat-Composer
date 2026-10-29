@@ -1,0 +1,53 @@
+name: ci
+
+on: push
+
+jobs: 
+    build: 
+        name: ci
+        runs-on: ubuntu-latest
+        permissions:
+          id-token: write
+          contents: read
+        env:
+          REPOSITORY: ecs_tc
+          IMAGE_TAG: ${{ github.sha }}
+        steps:
+          - name: checkout
+            uses: actions/checkout@v7
+
+          - name: scan
+            uses: super-linter/super-linter@v9
+
+          - name: OIDC
+            uses: aws-actions/configure-aws-credentials@v6.3.0
+            with:
+              role-to-assume: x
+              aws-region: us-east-1
+
+          - name: ecr login
+            id: login
+            uses: aws-actions/amazon-ecr-login@v2
+
+          - name: docker build and tag
+            env:
+              REGISTRY: ${{ steps.login.outputs.registry}}
+            run: |
+              cd ./app
+              docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+
+          - name: image scan
+            uses: aquasecurity/trivy-action@v0.36.0
+            with:
+              image-ref: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
+              exit-code: 1
+              severity: 'CRITICAL,HIGH'
+
+          - name: docker push
+            env:
+              REGISTRY: ${{ steps.login.outputs.registry}}
+            run: |
+              docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+
+            
