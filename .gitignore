@@ -4,3 +4,4 @@
 *.tfstate
 *.tfstate.backup
 .terragrunt-cache
+DS_Store
