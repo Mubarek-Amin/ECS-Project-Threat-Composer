@@ -35,8 +35,6 @@ jobs:
           terraform init
           terraform fmt $$ terraform validate
 
-      - name: terraform scan
-        uses: actions/
 
       - name: terraform deploy
         env:
