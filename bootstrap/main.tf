@@ -66,3 +66,4 @@ resource "aws_iam_role_policy" "oidc_permissions" {
   role = aws_iam_role.oidc_role.name
   policy = data.aws_iam_policy_document.permissions.json
 }
+
