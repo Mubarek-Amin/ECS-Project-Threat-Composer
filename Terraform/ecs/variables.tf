@@ -13,3 +13,6 @@ variable "exec_arn" {
 variable "ecs_sg_id" {
   
 }
+variable "image_tag" {
+  
+}

@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "ecs_tc_td" {
   execution_role_arn = var.exec_arn
   container_definitions = jsonencode([{
     name = "ecs_tc"
-    image = "${var.image}:${local.tag}"
+    image = "${var.image}:${var.image_tag}"
     cpu = 256
     memory= 512
     portMappings = [{
@@ -58,8 +58,5 @@ resource "aws_cloudwatch_log_group" "ecs_log" {
   retention_in_days = 14
 }
  
-locals {
-  tag = "1"
-}
 
  
