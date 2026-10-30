@@ -32,6 +32,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
     "isolatedModules": true,
     "noEmit": true,
     "emitDecoratorMetadata": true,
