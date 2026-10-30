@@ -22,7 +22,7 @@ jobs:
           - name: OIDC
             uses: aws-actions/configure-aws-credentials@v6.3.0
             with:
-              role-to-assume: x
+              role-to-assume: ${{ vars.oidc_role }}
               aws-region: us-east-1
 
           - name: ecr login
