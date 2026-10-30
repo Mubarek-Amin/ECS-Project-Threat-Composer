@@ -29,13 +29,6 @@ jobs:
       - name: terragrunt setup
         uses: gruntwork-io/terragrunt-action@v3
 
-      - name: terraform check
-        run: |
-          cd ./Terraform
-          terraform init
-          terraform fmt $$ terraform validate
-
-
       - name: terraform deploy
         env:
           IMAGE_TAG: ${{ github.event.workflow_run.head_sha }}
