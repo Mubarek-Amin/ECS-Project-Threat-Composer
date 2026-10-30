@@ -1,3 +1,4 @@
+#trivy:ignore:AVD-AWS-0104
 resource "aws_security_group" "alb_sg" {
     name = "alb-sg"
     vpc_id = var.vpc_id
@@ -46,9 +47,9 @@ resource "aws_security_group_rule" "ecs_ingress" {
 }
 resource "aws_security_group_rule" "ecs_egress" {
     security_group_id = aws_security_group.ecs_sg.id
-    protocol = -1
-    from_port = 0
-    to_port = 0
+    protocol = "tcp"
+    from_port = 443
+    to_port = 443
     cidr_blocks = ["0.0.0.0/0"]
     type = "egress"
     

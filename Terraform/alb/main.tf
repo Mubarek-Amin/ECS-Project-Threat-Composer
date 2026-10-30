@@ -1,16 +1,18 @@
+#trivy:ignore:AVD-AWS-0053 Public ALB is intentional — internet-facing reverse proxy
 resource "aws_lb" "alb_tc" {
     name = "alb-tc"
     internal = false
     load_balancer_type = "application"
     security_groups = [var.alb_sg_id]
     subnets = var.subnet_id_pub
+    drop_invalid_header_fields = true
     
 }
 resource "aws_lb_listener" "HTTPS" {
   load_balancer_arn = aws_lb.alb_tc.arn
   port = 443
   protocol = "HTTPS"
-  ssl_policy = "ELBSecurityPolicy-2016-08"
+  ssl_policy = "ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09"
   certificate_arn = var.cert_arn
   default_action {
     type = "forward"
