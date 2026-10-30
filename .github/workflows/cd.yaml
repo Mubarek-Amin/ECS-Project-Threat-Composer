@@ -20,7 +20,7 @@ jobs:
       - name: OIDC
         uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
-          role-to-assume: ${{ vars.oidc_role }}
+          role-to-assume: ${{ vars.OIDC_ARN }}
           aws-region: us-east-1
 
       - name: terraform setup
