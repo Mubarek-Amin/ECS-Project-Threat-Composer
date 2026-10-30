@@ -1,4 +1,4 @@
-#trivy:ignore:AVD-AWS-0104
+
 resource "aws_security_group" "alb_sg" {
     name = "alb-sg"
     vpc_id = var.vpc_id
@@ -45,6 +45,7 @@ resource "aws_security_group_rule" "ecs_ingress" {
     type = "ingress"
 
 }
+#trivy:ignore:AVD-AWS-0104
 resource "aws_security_group_rule" "ecs_egress" {
     security_group_id = aws_security_group.ecs_sg.id
     protocol = "tcp"
