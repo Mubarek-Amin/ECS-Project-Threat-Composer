@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "assume" {
   condition {
     test = "StringLike"
     variable = "token.actions.githubusercontent.com:sub"
-    values = ["repo:Mubarek-Amin/ECS-Project-Threat-Composer:*"]
+    values = ["repo:Mubarek-Amin@106826785/ECS-Project-Threat-Composer@1336316203:*"]
   }
 }
 }
