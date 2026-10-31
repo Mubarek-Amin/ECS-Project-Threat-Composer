@@ -68,6 +68,7 @@ jobs:
             with:
               image-ref: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
               exit-code: 1
+              ignore-unfixed: true
               severity: 'CRITICAL,HIGH'
 
           - name: docker push

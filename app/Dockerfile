@@ -11,13 +11,13 @@ COPY . .
 
 RUN yarn build
 
-FROM node:20-bookworm-slim AS runner
+FROM node:20-alpine AS runner
 
 RUN yarn global add serve
 
 COPY --from=builder app/build/ /build
 
-RUN useradd nonroot
+RUN adduser -D nonroot
 
 USER nonroot
 
