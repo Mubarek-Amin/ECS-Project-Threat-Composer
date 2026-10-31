@@ -27,6 +27,7 @@ jobs:
         terragrunt --version
     - name: destroy
       run: |
+        cd /terraform/live/dev
         terragrunt destroy --auto-approve
 
 
