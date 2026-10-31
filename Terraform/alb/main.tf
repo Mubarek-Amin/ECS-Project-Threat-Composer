@@ -34,7 +34,7 @@ resource "aws_lb_listener" "HTTP" {
 
 }
 resource "aws_lb_target_group" "alb_tc_tg" {
-  port = 3000
+  port = 80
   protocol = "HTTP"
   target_type = "ip"
   vpc_id = var.vpc_id

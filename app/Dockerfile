@@ -11,16 +11,14 @@ COPY . .
 
 RUN yarn build
 
-FROM node:20-alpine AS runner
+#nginx runner used to decrease CVEs from the node pks dependencies
+FROM nginx:alpine AS runner
 
-RUN yarn global add serve
 
-COPY --from=builder app/build/ /build
+COPY --from=builder app/build/ /usr/share/nginx/html
 
-RUN adduser -D nonroot
+COPY nginx.conf etc/nginx/conf.d/default.config
 
-USER nonroot
+EXPOSE 80
 
-EXPOSE 3000
 
-CMD ["serve", "-s", "build" ]
