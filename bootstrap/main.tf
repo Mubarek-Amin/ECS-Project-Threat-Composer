@@ -55,7 +55,8 @@ data "aws_iam_policy_document" "permissions" {
       "acm:*",
       "route53:*",
       "iam:*",
-      "s3:*"
+      "s3:*",
+      "logs:*"
 
     ]
     resources = ["*"]

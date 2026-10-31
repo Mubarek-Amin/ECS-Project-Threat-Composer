@@ -15,8 +15,8 @@ resource "aws_ecs_task_definition" "ecs_tc_td" {
     cpu = 256
     memory= 512
     portMappings = [{
-      containerPort = 3000
-      hostPort = 3000
+      containerPort = 80
+      hostPort = 80
     }]
     logConfiguration = {
       logDriver = "awslogs"
@@ -42,7 +42,7 @@ resource "aws_ecs_service" "ecs_tc_service" {
   load_balancer {
     target_group_arn = var.tg_arn
     container_name = "ecs_tc"
-    container_port = 3000
+    container_port = 80
   }
   network_configuration {
     subnets = var.subnet_id_priv

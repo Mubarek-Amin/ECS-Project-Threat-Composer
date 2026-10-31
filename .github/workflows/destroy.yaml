@@ -1,0 +1,33 @@
+name: destroy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v7
+    
+    - name: OIDC
+      uses: aws-actions/configure-aws-credentials@v6.3.0
+      with:
+        role-to-assume: ${{ vars.OIDC_ARN }}
+        region: us-east-1
+
+    - name: Install terragrunt
+      run: |
+        sudo curl -Lo /usr/local/bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v0.67.0/terragrunt_linux_amd64
+        sudo chmod +x /usr/local/bin/terragrunt
+        terragrunt --version
+    - name: destroy
+      run: |
+        terragrunt destroy --auto-approve
+
+
+      
