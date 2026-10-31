@@ -8,6 +8,16 @@ resource "aws_ecr_repository" "ECS_TC"{
 
 resource "aws_s3_bucket" "tc_ecs_s3"{
   bucket = "s3-ecs-tc"
+  versioning {
+    enabled = true
+  }
+  server_side_encryption_configuration {
+    rule{
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "aws:kms"
+      }
+    }
+  }
   
   tags= {
     name = "s3_ecs_tc"
