@@ -14,6 +14,7 @@ RUN yarn build
 #nginx runner used to decrease CVEs from the node pks dependencies
 FROM nginx:alpine AS runner
 
+RUN apk update && apk upgrade --no-cache
 
 COPY --from=builder app/build/ /usr/share/nginx/html
 
