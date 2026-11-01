@@ -20,6 +20,9 @@ jobs:
         role-to-assume: ${{ vars.OIDC_ARN }}
         aws-region: us-east-1
 
+    - name: terraform setup
+      uses: hashicorp/setup-terraform@v4
+
     - name: Install terragrunt
       run: |
         sudo curl -Lo /usr/local/bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v0.67.0/terragrunt_linux_amd64
@@ -27,7 +30,7 @@ jobs:
         terragrunt --version
     - name: destroy
       run: |
-        cd Terraform/live/dev
+        cd ./Terraform/live/dev
         terragrunt destroy --auto-approve
 
 
